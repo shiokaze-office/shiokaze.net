@@ -15,6 +15,8 @@ import "../css/@wordpress/block-library/build-style/theme.css"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Contact from "../components/contact"
+import Map from "../components/map"
 
 const PageTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {
@@ -44,9 +46,13 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
           )}
         </header>
 
+        {post.slug === 'about' && (<Map />)}
+
         {!!post.content && (
           <section itemProp="articleBody">{parse(post.content)}</section>
         )}
+
+        {post.slug === 'contact' && (<Contact />)}
 
         <hr />
 
@@ -100,6 +106,7 @@ export const pageQuery = graphql`
       id
       content
       title
+      slug
       date(formatString: "MMMM DD, YYYY")
 
       featuredImage {
@@ -131,17 +138,45 @@ export const pageQuery = graphql`
 `
 
 const Article = styled.article`
-  max-width: var(--maxWidth-4xl);
-  margin: 0 auto;
   padding-top: var(--spacing-10);
   font-size: var(--fontSize-3);
+
+  h1, h2, h3, h4, h5, ul, ol, p, hr {
+    max-width: var(--maxWidth-4xl);
+    margin: 0 auto;
+  }
+  h1, h2, h3, h4, h5 {
+    padding-top: var(--spacing-12);
+  }
+  ul, ol, p {
+    padding-top: var(--spacing-5);
+  }
+  hr {
+    margin-toP: var(--spacing-10);
+  }
+
+  section {
+    img {
+      width: 80%;
+      height: auto;
+      margin: 0 auto;
+      padding: 0;
+      display: block;
+    }
+  }
+
   header {
-    padding-top: var(--spacing-10);
+    max-width: var(--maxWidth-4xl);
+    margin: 0 auto;
   }
+
   footer {
+    max-width: var(--maxWidth-4xl);
+    margin: 0 auto;
     padding-top: var(--spacing-10);
   }
-  ul {
+
+  ul, ol {
     padding-left: var(--spacing-6);
     li {
       padding-left: var(--spacing-3);

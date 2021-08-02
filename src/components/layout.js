@@ -24,7 +24,7 @@ const Layout = ({ isHomePage, children }) => {
       }
       infonav: allWpPage(
         sort: { fields: [date], order: DESC }
-        filter: {slug: {regex: "/^about-.*/"}}
+        filter: {slug: {regex: "/^(about|contact|public-notary)$/"}}
       ) {
         nodes {
           uri

@@ -7,7 +7,7 @@ import Seo from "../components/seo"
 import styled from 'styled-components'
 
 const HomePage = ({ data }) => {
-  const siteTitle = data.site.siteMetadata.title
+  const title = data.wp.generalSettings.title
   const proposals = data.proposals.nodes
   const guide = data.guide.nodes
   const blogs = data.blogs.nodes
@@ -16,7 +16,7 @@ const HomePage = ({ data }) => {
   if (!guide.length && !proposals.length && !blogs.length) {
     return (
       <Layout isHomePage>
-        <Seo title={siteTitle} />
+        <Seo title={title} />
         <p>
           No blog posts found. Add posts to your WordPress site and they'll
           appear here!
@@ -27,7 +27,7 @@ const HomePage = ({ data }) => {
 
   return (
     <Layout isHomePage>
-      <Seo title={siteTitle} />
+      <Seo title={title} />
 
       <Guide className="clearfix">
         <ol>
@@ -165,15 +165,15 @@ const HomePage = ({ data }) => {
 export default HomePage
 
 export const pageQuery = graphql`
-  query PostArchive {
-    site {
-      siteMetadata {
+  query IndexPage {
+    wp {
+      generalSettings {
         title
       }
     }
     guide: allWpPage(
       sort: { fields: [date], order: DESC }
-      filter: {slug: {regex: "/^(?!proposals-|about-).*/"}}
+      filter: {slug: {regex: "/^(?!proposals-.*|about|contact|public-notary)/"}}
     ) {
       nodes {
         uri
