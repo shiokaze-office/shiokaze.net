@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import Image from "gatsby-image"
 import parse from "html-react-parser"
+import styled from 'styled-components'
 
 // We're using Gutenberg so we need the block styles
 // these are copied into this project due to a conflict in the postCSS
@@ -15,7 +16,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const BlogPostTemplate = ({ data: { previous, next, post } }) => {
+const PageTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {
     fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
     alt: post.featuredImage?.node?.alt || ``,
@@ -23,17 +24,15 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
 
   return (
     <Layout>
-      <Seo title={post.title} description={post.excerpt} />
+      <Seo title={post.title} description={post.title} />
 
-      <article
+      <Article
         className="blog-post"
         itemScope
         itemType="http://schema.org/Article"
       >
         <header>
           <h1 itemProp="headline">{parse(post.title)}</h1>
-
-          <p>{post.date}</p>
 
           {/* if we have a featured image for this post let's display it */}
           {featuredImage?.fluid && (
@@ -54,9 +53,9 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         <footer>
           <Bio />
         </footer>
-      </article>
+      </Article>
 
-      <nav className="blog-post-nav">
+      <PageNav className="blog-post-nav">
         <ul
           style={{
             display: `flex`,
@@ -82,24 +81,23 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
             )}
           </li>
         </ul>
-      </nav>
+      </PageNav>
     </Layout>
   )
 }
 
-export default BlogPostTemplate
+export default PageTemplate
 
 export const pageQuery = graphql`
-  query BlogPostById(
+  query PageById(
     # these variables are passed in via createPage.pageContext in gatsby-node.js
     $id: String!
     $previousPostId: String
     $nextPostId: String
   ) {
     # selecting the current post by id
-    post: wpPost(id: { eq: $id }) {
+    post: wpPage(id: { eq: $id }) {
       id
-      excerpt
       content
       title
       date(formatString: "MMMM DD, YYYY")
@@ -119,15 +117,39 @@ export const pageQuery = graphql`
     }
 
     # this gets us the previous post by id (if it exists)
-    previous: wpPost(id: { eq: $previousPostId }) {
+    previous: wpPage(id: { eq: $previousPostId }) {
       uri
       title
     }
 
     # this gets us the next post by id (if it exists)
-    next: wpPost(id: { eq: $nextPostId }) {
+    next: wpPage(id: { eq: $nextPostId }) {
       uri
       title
     }
   }
+`
+
+const Article = styled.article`
+  max-width: var(--maxWidth-4xl);
+  margin: 0 auto;
+  padding-top: var(--spacing-10);
+  font-size: var(--fontSize-3);
+  header {
+    padding-top: var(--spacing-10);
+  }
+  footer {
+    padding-top: var(--spacing-10);
+  }
+  ul {
+    padding-left: var(--spacing-6);
+    li {
+      padding-left: var(--spacing-3);
+    }
+  }
+`
+
+const PageNav = styled.nav`
+  max-width: var(--maxWidth-4xl);
+  margin: 0 auto;
 `
