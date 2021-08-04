@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Image from "gatsby-image"
 import parse from "html-react-parser"
 import styled from 'styled-components'
@@ -12,7 +12,6 @@ import styled from 'styled-components'
 import "../css/@wordpress/block-library/build-style/style.css"
 import "../css/@wordpress/block-library/build-style/theme.css"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Contact from "../components/contact"
@@ -53,41 +52,7 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
         )}
 
         {post.slug === 'contact' && (<Contact />)}
-
-        <hr />
-
-        <footer>
-          <Bio />
-        </footer>
       </Article>
-
-      <PageNav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.uri} rel="prev">
-                ← {parse(previous.title)}
-              </Link>
-            )}
-          </li>
-
-          <li>
-            {next && (
-              <Link to={next.uri} rel="next">
-                {parse(next.title)} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </PageNav>
     </Layout>
   )
 }
@@ -141,7 +106,7 @@ const Article = styled.article`
   padding-top: var(--spacing-10);
   font-size: var(--fontSize-3);
 
-  h1, h2, h3, h4, h5, ul, ol, p, hr {
+  h1, h2, h3, h4, h5, ul, ol, p, hr, form {
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
   }
@@ -182,9 +147,4 @@ const Article = styled.article`
       padding-left: var(--spacing-3);
     }
   }
-`
-
-const PageNav = styled.nav`
-  max-width: var(--maxWidth-4xl);
-  margin: 0 auto;
 `

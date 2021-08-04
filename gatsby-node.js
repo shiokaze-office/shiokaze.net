@@ -15,14 +15,13 @@ exports.createPages = async gatsbyUtilities => {
   }
 
   await createBlogs({ blogs, gatsbyUtilities })
-  await createBlogArchive({ blogs, gatsbyUtilities })
+  //await createBlogArchive({ blogs, gatsbyUtilities })
   await createPages({ pages, gatsbyUtilities })
 }
 
 const createBlogs = async ({ blogs, gatsbyUtilities }) =>
   Promise.all(
     blogs.map(({ previous, blog, next }) =>
-      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
         path: blog.uri,
         component: path.resolve(`./src/templates/blog.js`),
@@ -45,9 +44,7 @@ async function createBlogArchive({ blogs, gatsbyUtilities }) {
       }
     }
   `)
-
   const { postsPerPage } = graphqlResult.data.wp.readingSettings
-
   const postsChunkedIntoArchivePages = chunk(blogs, postsPerPage)
   const totalPages = postsChunkedIntoArchivePages.length
 
@@ -64,29 +61,19 @@ async function createBlogArchive({ blogs, gatsbyUtilities }) {
           //return page === 1 ? `/` : `/blog/${page}`
           return `/blog/${page}`
         }
-
         return null
       }
 
-      // createPage is an action passed to createPages
-      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       await gatsbyUtilities.actions.createPage({
         path: getPagePath(pageNumber),
-
-        // use the blog post archive template as the page component
         component: path.resolve(`./src/templates/blog-archive.js`),
-
-        // `context` is available in the template as a prop and
-        // as a variable in GraphQL.
         context: {
           // the index of our loop is the offset of which posts we want to display
           // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
           // etc
           offset: index * postsPerPage,
-
           // We need to tell the template how many posts to display too
           postsPerPage,
-
           nextPagePath: getPagePath(pageNumber + 1),
           previousPagePath: getPagePath(pageNumber - 1),
         },
@@ -143,8 +130,7 @@ const createPages = async ({ pages, gatsbyUtilities }) =>
 
 async function getPages({ graphql, reporter }) {
   const graphqlResult = await graphql(/* GraphQL */ `
-    query WpPosts {
-      # Query all WordPress blog posts sorted by date
+    query WpPages {
       allWpPage(sort: { fields: [date], order: DESC }) {
         edges {
           previous {

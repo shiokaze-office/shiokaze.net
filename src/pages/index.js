@@ -8,6 +8,7 @@ import styled from 'styled-components'
 
 const HomePage = ({ data }) => {
   const title = data.wp.generalSettings.title
+  const description = data.wp.generalSettings.description
   const proposals = data.proposals.nodes
   const guide = data.guide.nodes
   const blogs = data.blogs.nodes
@@ -27,7 +28,11 @@ const HomePage = ({ data }) => {
 
   return (
     <Layout isHomePage>
-      <Seo title={title} />
+      <Seo title={title} description={description} />
+
+      <Hero>
+        <p>{description}</p>
+      </Hero>
 
       <Guide className="clearfix">
         <ol>
@@ -169,11 +174,12 @@ export const pageQuery = graphql`
     wp {
       generalSettings {
         title
+        description
       }
     }
     guide: allWpPage(
       sort: { fields: [date], order: DESC }
-      filter: {slug: {regex: "/^(?!proposals-.*|about|contact|public-notary)/"}}
+      filter: {slug: {regex: "/^(?!proposals-.*|about|contact|public-notary|privacy-policy)/"}}
     ) {
       nodes {
         uri
@@ -295,4 +301,14 @@ const TitleSpan = styled.span`
   font-weight: var(--fontWeight-black);
 `
 const ExcerptSpan = styled.span`
+`
+const Hero = styled.div`
+  margin: var(--spacing-32) auto var(--spacing-20);
+  padding: var(--spacing-32) 0 var(--spacing-20);
+  width: var(--maxWidth-4xl);
+  font-size: var(--fontSize-4);
+  p {
+    width: var(--maxWidth-xl);
+    font-feature-settings: "palt";
+  }
 `
