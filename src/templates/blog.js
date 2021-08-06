@@ -12,7 +12,7 @@ import styled from 'styled-components'
 import "../css/@wordpress/block-library/build-style/style.css"
 import "../css/@wordpress/block-library/build-style/theme.css"
 
-import Bio from "../components/bio"
+//import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
@@ -50,11 +50,10 @@ const BlogTemplate = ({ data: { previous, next, post } }) => {
           <section itemProp="articleBody">{parse(post.content)}</section>
         )}
 
-        <hr />
-
+        {/*<hr />
         <footer>
           <Bio />
-        </footer>
+        </footer>*/}
       </Article>
 
       <PageNav className="blog-post-nav">
@@ -134,25 +133,51 @@ export const pageQuery = graphql`
 `
 
 const Article = styled.article`
-  max-width: var(--maxWidth-4xl);
-  margin: 0 auto;
   padding-top: var(--spacing-10);
   font-size: var(--fontSize-3);
+
+  h1, h2, h3, h4, h5, ul, ol, p, hr, form {
+    max-width: var(--maxWidth-4xl);
+    margin: 0 auto;
+    padding: 0 var(--spacing-10);
+  }
+  h1, h2, h3, h4, h5 {
+    padding-top: var(--spacing-12);
+  }
+  ul, ol, p {
+    padding-top: var(--spacing-5);
+  }
+  ul, ol {
+    padding-left: var(--spacing-16);
+    li {
+      padding-left: var(--spacing-13);
+    }
+  }
+  hr {
+    margin-top: var(--spacing-10);
+  }
+  section {
+    img {
+      width: 80%;
+      height: auto;
+      margin: 0 auto;
+      padding: 0;
+      display: block;
+    }
+  }
   header {
-    padding-top: var(--spacing-10);
+    max-width: var(--maxWidth-4xl);
+    margin: 0 auto;
   }
   footer {
-    padding-top: var(--spacing-10);
-  }
-  ul {
-    padding-left: var(--spacing-6);
-    li {
-      padding-left: var(--spacing-3);
-    }
+    max-width: var(--maxWidth-4xl);
+    margin: 0 auto;
+    padding: var(--spacing-10) var(--spacing-10) 0;
   }
 `
 
 const PageNav = styled.nav`
   max-width: var(--maxWidth-4xl);
-  margin: 0 auto;
+  margin: var(--spacing-20) auto 0;
+  padding: 0 var(--spacing-10);
 `

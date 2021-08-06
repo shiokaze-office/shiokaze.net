@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import styled from 'styled-components'
+import Loader from 'react-loader-spinner'
 
 const Contact = () => {
-  const endpoint = `https://getform.io/f/97c34c55-b3b4-47bd-ad8a-7c8a4ce6354f`
+  const endpoint = `https://linyows.lolipop.jp/contact.shiokaze.net/`
   const initQuery = {
     name: ``,
     phone: ``,
@@ -12,6 +13,7 @@ const Contact = () => {
     agree: ``,
   }
   const [formStatus, setFormStatus] = useState(false)
+  const [lockStatus, setLockStatus] = useState(false)
   const [query, setQuery] = useState(initQuery)
   const [errors, setErrors] = useState(initQuery)
 
@@ -38,32 +40,35 @@ const Contact = () => {
     let isValid = true
 
     Object.entries(query).forEach(([k, v]) => {
-      if (v.length < 3) {
+      if (k !== 'agree' && v.length === 0) {
         isValid = false
         setErrors((prevState) => ({
           ...prevState,
-          [k]: `入力が短かすぎるようです。`
+          [k]: `* このフィールドは入力必須です`
         }))
-      }
-      if (k === 'email' && !validateEmail(v)) {
+      } else if (k !== 'agree' && v.length < 3) {
         isValid = false
         setErrors((prevState) => ({
           ...prevState,
-          [k]: `メールアドレスの形式が正しくないようです。`
+          [k]: `* 入力が短かすぎるようです。`
         }))
-      }
-      if (k === 'phone' && !validatePhone(v)) {
+      } else if (k === 'email' && !validateEmail(v)) {
         isValid = false
         setErrors((prevState) => ({
           ...prevState,
-          [k]: `電話番号の形式が正しくないようです。`
+          [k]: `* メールアドレスの形式が正しくないようです。`
         }))
-      }
-      if (k === 'agree' && v !== 'agree') {
+      } else if (k === 'phone' && !validatePhone(v)) {
         isValid = false
         setErrors((prevState) => ({
           ...prevState,
-          [k]: `プライバシーポリシーをご確認ください。`
+          [k]: `* 電話番号の形式が正しくないようです。`
+        }))
+      } else if (k === 'agree' && v !== 'agree') {
+        isValid = false
+        setErrors((prevState) => ({
+          ...prevState,
+          [k]: `* プライバシーポリシーをご確認ください。`
         }))
       }
     })
@@ -73,9 +78,11 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLockStatus(true)
     setErrors(initQuery)
 
     if (!validate()) {
+      setLockStatus(false)
       return
     }
 
@@ -86,90 +93,100 @@ const Contact = () => {
 
     fetch(endpoint, { method: 'POST', body: formData })
       .then(response => {
+        setLockStatus(false)
         setFormStatus(true)
         setQuery(initQuery)
         console.log(response)
       })
-      .catch(error => console.log(error))
+      .catch(error => setLockStatus(false) && console.log(error))
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       <TwoColumn>
         <One>
-          <Label htmlFor="name" required="required">氏名</Label>
+          <Label htmlFor="name">
+            氏名
+            {errors.name && (<Err>{errors.name}</Err>)}
+          </Label>
           <Input
             type="text"
             id="name"
             placeholder="潮風 花子"
-            required="required"
             name="name"
             value={query.name}
             onChange={handleChange()}
           />
-          {errors.name && (<Err>{errors.name}</Err>)}
         </One>
         <Two>
-          <Label htmlFor="email" required="required">電話番号</Label>
+          <Label htmlFor="email">
+            電話番号
+            {errors.phone && (<Err>{errors.phone}</Err>)}
+          </Label>
           <Input
             type="tel"
             id="phone"
             placeholder="000-0000-0000"
-            required="required"
             name="phone"
             value={query.phone}
             onChange={handleChange()}
           />
-          {errors.phone && (<Err>{errors.phone}</Err>)}
         </Two>
       </TwoColumn>
-      <Label htmlFor="email" required="required">メールアドレス</Label>
+      <Label htmlFor="email">
+        メールアドレス
+        {errors.email && (<Err>{errors.email}</Err>)}
+      </Label>
       <Input
         type="email"
         id="email"
         placeholder="account@example.com"
-        required="required"
         name="email"
         value={query.email}
         onChange={handleChange()}
       />
-      {errors.email && (<Err>{errors.email}</Err>)}
-      <Label htmlFor="address" required="required">住所</Label>
+      <Label htmlFor="address">
+        住所
+        {errors.address && (<Err>{errors.address}</Err>)}
+      </Label>
       <Input
         type="text"
         id="address"
         placeholder="福岡市西区..."
-        required="required"
         name="address"
         value={query.address}
         onChange={handleChange()}
       />
-      {errors.address && (<Err>{errors.address}</Err>)}
-      <Label htmlFor="message" required="required">内容</Label>
+      <Label htmlFor="message">
+        内容
+        {errors.message && (<Err>{errors.message}</Err>)}
+      </Label>
       <Textarea
         name="message"
         id="message"
-        required="required"
         rows="5"
         value={query.message}
         onChange={handleChange()}
       />
-      {errors.message && (<Err>{errors.message}</Err>)}
       <Checkbox>
         <Check
           name="agree"
           id="agree"
           type="checkbox"
           value="agree"
-          required="required"
           onChange={handleChange()}
         />
-        <label htmlFor="agree" required="required">
+        <label htmlFor="agree">
           <a href="/privacy-policy/" target="_blank">プライバシーポリシー</a> に同意する
+          {errors.agree && (<AgreementErr className="privacy-policy-agreement">{errors.agree}</AgreementErr>)}
         </label>
-        {errors.agree && (<Err>{errors.agree}</Err>)}
       </Checkbox>
-      {formStatus ? (<Sent>お問い合わせを送信しました。</Sent>) : (<Button type="submit">送信する</Button>)}
+      {formStatus ? (<Sent>お問い合わせを送信しました。</Sent>) : (
+        <ButtonBox>
+          {lockStatus && (<Spinner type="Grid" color="#FFF" height={30} width={30} />)}
+          <Button type="submit" disabled={lockStatus}>送信する</Button>
+        </ButtonBox>
+      )}
     </Form>
   )
 }
@@ -241,8 +258,27 @@ const Two = styled.div`
   grid-column: 3 / 3;
 `
 const Err = styled.span`
-  display: block;
+  letter-spacing: 0;
   color: red;
+  padding-left: var(--spacing-3);
   font-size: var(--fontSize-2);
   padding-top: var(--spacing-2);
+`
+const AgreementErr = styled(Err)`
+  display: block;
+  padding-left: 0;
+`
+const Spinner = styled(Loader)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -15px;
+  display: inline;
+`
+const ButtonBox = styled.div`
+  position: relative;
+  button:disabled {
+    color: var(--color-primary);
+  }
 `

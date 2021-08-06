@@ -109,6 +109,7 @@ const Article = styled.article`
   h1, h2, h3, h4, h5, ul, ol, p, hr, form {
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
+    padding: 0 var(--spacing-10);
   }
   h1, h2, h3, h4, h5 {
     padding-top: var(--spacing-12);
@@ -116,10 +117,15 @@ const Article = styled.article`
   ul, ol, p {
     padding-top: var(--spacing-5);
   }
-  hr {
-    margin-toP: var(--spacing-10);
+  ul, ol {
+    padding-left: var(--spacing-16);
+    li {
+      padding-left: var(--spacing-13);
+    }
   }
-
+  hr {
+    margin-top: var(--spacing-10);
+  }
   section {
     img {
       width: 80%;
@@ -129,22 +135,13 @@ const Article = styled.article`
       display: block;
     }
   }
-
   header {
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
   }
-
   footer {
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
     padding-top: var(--spacing-10);
-  }
-
-  ul, ol {
-    padding-left: var(--spacing-6);
-    li {
-      padding-left: var(--spacing-3);
-    }
   }
 `

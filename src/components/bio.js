@@ -36,7 +36,7 @@ const Bio = () => {
       )}
       {author?.firstName && (
         <p>
-          Written by <strong>{author.firstName}</strong>
+          この記事を書いた人 <strong>{author.firstName}</strong>
           {` `}
           {author?.description || null}
           {` `}
