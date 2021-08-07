@@ -178,6 +178,7 @@ const Copyright = styled.span`
   font-weight: bold;
   font-size: var(--spacing-5);
   padding-right: var(--spacing-5);
+  white-space: nowrap;
   a {
     text-decoration: none;
     color: var(--color-heading);
