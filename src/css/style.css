@@ -349,3 +349,13 @@ a:focus {
     list-style-position: inside;
   }
 }
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+@media (min-width: 481px) and ( max-width:1024px) {
+  html {
+    font-size: 14px;
+  }
+}

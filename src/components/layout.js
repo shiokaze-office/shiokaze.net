@@ -40,7 +40,7 @@ const Layout = ({ isHomePage, children }) => {
 
   return (
     <Wrapper data-is-root-path={isHomePage}>
-      <header className="global-header clearfix">
+      <header className="clearfix">
         <Logo>
           <img src={icon} alt="shiokaze icon" />
           {isHomePage ? (
@@ -50,18 +50,7 @@ const Layout = ({ isHomePage, children }) => {
           )}
         </Logo>
         <Nav>
-          <ul>
-            {globalnav.map(nav => {
-              return (
-                <li key={nav.url}>
-                  <Link to={nav.url}>{nav.label}</Link>
-                </li>
-              )
-            })}
-          </ul>
-        </Nav>
-        <InfoNav>
-          <ul>
+          <InfoUl>
             {infonav.map(nav => {
               return (
                 <li key={nav.uri}>
@@ -69,8 +58,17 @@ const Layout = ({ isHomePage, children }) => {
                 </li>
               )
             })}
-          </ul>
-        </InfoNav>
+          </InfoUl>
+          <GlobalUl>
+            {globalnav.map(nav => {
+              return (
+                <li key={nav.url}>
+                  <Link to={nav.url}>{nav.label}</Link>
+                </li>
+              )
+            })}
+          </GlobalUl>
+        </Nav>
       </header>
 
       <main>{children}</main>
@@ -92,17 +90,18 @@ const Layout = ({ isHomePage, children }) => {
 export default Layout
 
 const Wrapper = styled.div`
-  margin: var(--spacing-5) 0 0;
-  padding: var(--spacing-10) 0;
+  border-top: var(--spacing-2) #CEC0D9 solid;
+  margin: 0;
+  padding: 0;
 `
 const Logo = styled.div`
   margin: 0 0 0 var(--spacing-8);
   float: left;
-  padding: var(--spacing-5) 0 0 0;
-  white-space: nowrap;
+  padding: var(--spacing-20) 0 0 0;
   a {
     text-decoration: none;
     color: var(--color-heading);
+    white-space: nowrap;
   }
   h1, p {
     font-size: var(--fontSize-5);
@@ -118,41 +117,46 @@ const Logo = styled.div`
   img {
     width: var(--spacing-32);
     display: inline;
-    padding: 0 var(--spacing-3) 0 0;
+    padding: 0 var(--spacing-3) var(--spacing-3) 0;
     vertical-align: top;
   }
 `
-
 const Nav = styled.nav`
-  margin: 0 var(--spacing-8);
   float: right;
+  text-align: right;
+  margin: 0 var(--spacing-8);
   font-size: var(--spacing-6);
   ul {
     list-style-type: none;
+    margin-bottom: 0;
   }
   li {
     display: inline;
-    padding-right: 1em;
+    padding-right: var(--spacing-3);
     a {
       text-decoration: none;
+      white-space: nowrap;
     }
   }
-`
-
-const InfoNav = styled.nav`
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0 var(--spacing-8);
-  font-size: var(--spacing-6);
-  ul {
-    list-style-type: none;
+  @media ( max-width:1024px) {
+    float: left;
+    text-align: left;
+    margin: 0 var(--spacing-10);
   }
+`
+const GlobalUl = styled.ul`
+  margin-top: var(--spacing-3);
   li {
-    display: inline;
-    padding-right: 1em;
+    padding-right: var(--spacing-5);
+  }
+  @media ( max-width:1024px) {
+    margin-top: var(--spacing-5);
+  }
+`
+const InfoUl = styled.ul`
+  li {
+    line-height: 2;
     a {
-      text-decoration: none;
       font-family: var(--fontFamily-sans);
       padding: var(--spacing-2) var(--spacing-4);
       border: 1px solid var(--color-primary);
@@ -161,7 +165,6 @@ const InfoNav = styled.nav`
     }
   }
 `
-
 const Footer = styled.footer`
   margin: var(--spacing-32) var(--spacing-8) 0;
 `
@@ -169,6 +172,7 @@ const Copyright = styled.span`
   font-family: var(--fontFamily-sans);
   font-weight: bold;
   font-size: var(--spacing-5);
+  padding-right: var(--spacing-5);
   a {
     text-decoration: none;
     color: var(--color-heading);
@@ -176,5 +180,5 @@ const Copyright = styled.span`
 `
 const License = styled.span`
   font-size: var(--spacing-3);
-  padding-left: var(--spacing-5);
+  white-space: nowrap;
 `

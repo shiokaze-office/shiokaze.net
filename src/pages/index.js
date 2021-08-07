@@ -213,6 +213,7 @@ export const pageQuery = graphql`
     blogs: allWpPost(
       sort: { fields: [date], order: DESC }
       filter: {categories: {nodes: {elemMatch: {slug: {eq: "blog"}}}}}
+      limit: 5
     ) {
       nodes {
         uri
@@ -223,7 +224,9 @@ export const pageQuery = graphql`
     }
   }
 `
-
+const StyledHeader = styled.header`
+  padding: var(--spacing-10) var(--spacing-10) 0;
+`
 const StyledBox = styled.div`
   padding-top: var(--spacing-32);
   li {
@@ -244,6 +247,11 @@ const StyledBox = styled.div`
     }
     font-size: var(--fontSize-2);
   }
+  @media (max-width:768px) {
+    article {
+      width: auto;
+    }
+  }
 `
 
 const Guide = styled(StyledBox)`
@@ -252,14 +260,17 @@ const Proposals = styled(StyledBox)`
   article {
     width: 40rem;
   }
+  @media (max-width:768px) {
+    article {
+      width: auto;
+    }
+  }
 `
-const ProposalHeader = styled.header`
-  padding-left: var(--spacing-10);
+const ProposalHeader = styled(StyledHeader)`
 `
 const Covid19 = styled(StyledBox)`
 `
-const Covid19Header = styled.header`
-  padding-left: var(--spacing-10);
+const Covid19Header = styled(StyledHeader)`
 `
 const Blog = styled.div`
   padding-top: var(--spacing-32);
@@ -290,17 +301,30 @@ const Blog = styled.div`
       padding: 0 var(--spacing-5) 0 0;
     }
   }
+  @media (max-width:768px) {
+    article {
+      a {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
 `
-const BlogHeader = styled.header`
-  padding: 0 0 var(--spacing-8) var(--spacing-10);
+const BlogHeader = styled(StyledHeader)`
 `
 const DateSpan = styled.span`
+  @media (max-width:768px) {
+    display: block;
+  }
 `
 const TitleSpan = styled.span`
   font-family: var(--fontFamily-sans);
   font-weight: var(--fontWeight-black);
 `
 const ExcerptSpan = styled.span`
+  @media (max-width:768px) {
+    display: none;
+  }
 `
 const Hero = styled.div`
   margin: var(--spacing-32) auto var(--spacing-20);
@@ -310,5 +334,15 @@ const Hero = styled.div`
   p {
     width: var(--maxWidth-xl);
     font-feature-settings: "palt";
+  }
+  @media (max-width:768px) {
+    width: 100%;
+    margin: 0;
+    padding: var(--spacing-10) 0;
+    font-size: var(--fontSize-2);
+    p {
+      width: 100%;
+      padding: var(--spacing-10);
+    }
   }
 `
