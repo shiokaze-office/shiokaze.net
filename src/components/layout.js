@@ -120,6 +120,9 @@ const Logo = styled.div`
     padding: 0 var(--spacing-3) var(--spacing-3) 0;
     vertical-align: top;
   }
+  @media (max-width:1024px) {
+    float: none;
+  }
 `
 const Nav = styled.nav`
   float: right;
@@ -138,8 +141,8 @@ const Nav = styled.nav`
       white-space: nowrap;
     }
   }
-  @media ( max-width:1024px) {
-    float: left;
+  @media (max-width:1024px) {
+    float: none;
     text-align: left;
     margin: 0 var(--spacing-10);
   }
