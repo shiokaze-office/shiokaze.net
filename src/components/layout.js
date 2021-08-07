@@ -149,16 +149,17 @@ const Nav = styled.nav`
 `
 const GlobalUl = styled.ul`
   margin-top: var(--spacing-3);
-  overflow: scroll;
   li {
     padding-right: var(--spacing-5);
   }
-  @media ( max-width: 767px) {
+  @media (max-width: 767px) {
     margin-top: var(--spacing-5);
   }
+  /* for safari */
+  overflow-x: scroll;
+  overflow-y: visible;
 `
 const InfoUl = styled.ul`
-  overflow: scroll;
   li {
     line-height: 2;
     a {
@@ -169,6 +170,9 @@ const InfoUl = styled.ul`
       border-radius: 20px;
     }
   }
+  /* for safari */
+  overflow-x: scroll;
+  overflow-y: visible;
 `
 const Footer = styled.footer`
   margin: var(--spacing-32) var(--spacing-8) 0;
@@ -182,6 +186,10 @@ const Copyright = styled.span`
   a {
     text-decoration: none;
     color: var(--color-heading);
+  }
+  /* for safari */
+  @media (max-width: 767px) {
+    display: block;
   }
 `
 const License = styled.span`
