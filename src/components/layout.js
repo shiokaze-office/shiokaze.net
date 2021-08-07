@@ -90,7 +90,7 @@ const Layout = ({ isHomePage, children }) => {
 export default Layout
 
 const Wrapper = styled.div`
-  border-top: var(--spacing-2) #CEC0D9 solid;
+  border-top: var(--spacing-4) #E6E0ED solid;
   margin: 0;
   padding: 0;
 `
