@@ -149,6 +149,7 @@ const Nav = styled.nav`
 `
 const GlobalUl = styled.ul`
   margin-top: var(--spacing-3);
+  overflow: scroll;
   li {
     padding-right: var(--spacing-5);
   }
@@ -157,6 +158,7 @@ const GlobalUl = styled.ul`
   }
 `
 const InfoUl = styled.ul`
+  overflow: scroll;
   li {
     line-height: 2;
     a {
