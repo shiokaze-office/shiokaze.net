@@ -120,7 +120,7 @@ const Logo = styled.div`
     padding: 0 var(--spacing-3) var(--spacing-3) 0;
     vertical-align: top;
   }
-  @media (max-width:1024px) {
+  @media (max-width: 767px) {
     float: none;
   }
 `
@@ -141,7 +141,7 @@ const Nav = styled.nav`
       white-space: nowrap;
     }
   }
-  @media (max-width:1024px) {
+  @media (max-width: 767px) {
     float: none;
     text-align: left;
     margin: 0 var(--spacing-10);
@@ -152,7 +152,7 @@ const GlobalUl = styled.ul`
   li {
     padding-right: var(--spacing-5);
   }
-  @media ( max-width:1024px) {
+  @media ( max-width: 767px) {
     margin-top: var(--spacing-5);
   }
 `
