@@ -155,7 +155,6 @@ const GlobalUl = styled.ul`
   @media (max-width: 767px) {
     margin-top: var(--spacing-5);
     /* for safari */
-    padding-bottom: var(--spacing-2);
     overflow-x: scroll;
     overflow-y: visible;
   }
@@ -173,6 +172,7 @@ const InfoUl = styled.ul`
   }
   /* for safari */
   @media (max-width: 767px) {
+    padding-bottom: var(--spacing-2);
     overflow-x: scroll;
     overflow-y: visible;
   }
