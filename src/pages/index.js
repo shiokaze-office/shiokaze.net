@@ -5,7 +5,6 @@ import parse from "html-react-parser"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import styled from 'styled-components'
-import hero from "../../content/assets/happy-life.svg"
 
 const HomePage = ({ data }) => {
   const title = data.wp.generalSettings.title
@@ -14,6 +13,7 @@ const HomePage = ({ data }) => {
   const guide = data.guide.nodes
   const blogs = data.blogs.nodes
   const covid19 = data.covid19.nodes
+  const heroImage = data.file.publicURL
 
   if (!guide.length && !proposals.length && !blogs.length) {
     return (
@@ -32,7 +32,7 @@ const HomePage = ({ data }) => {
       <Seo title={title} description={description} />
 
       <Hero>
-        <img src={hero} alt="Happy Life" />
+        <img src={heroImage} width="500" height="228" alt="Happy Life" />
         <p>{description}</p>
       </Hero>
 
@@ -176,6 +176,9 @@ export default HomePage
 
 export const pageQuery = graphql`
   query IndexPage {
+    file(name: { eq: "happy-life" }) {
+      publicURL
+    }
     wp {
       generalSettings {
         title
@@ -348,15 +351,13 @@ const Hero = styled.div`
     font-feature-settings: "palt";
     position: absolute;
     z-index: 2;
-    top: var(--spacing-16);
+    top: 0;
     left: 0;
-    @media (max-width: 1024px) {
-      top: 0;
-    }
   }
   img {
     padding-left: var(--spacing-24);
     width: 100%;
+    height: auto;
     @media (max-width: 768px) {
       padding-top: var(--spacing-24);
       padding-left: 0;

@@ -2,11 +2,13 @@ import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import parse from "html-react-parser"
 import styled from 'styled-components'
-import icon from "../../content/assets/shiokaze-icon.svg"
 
 const Layout = ({ isHomePage, children }) => {
   const data = useStaticQuery(graphql`
     query LayoutQuery {
+      file(relativePath: { eq: "shiokaze-icon.svg" }) {
+        publicURL
+      }
       wp {
         generalSettings {
           title
@@ -37,6 +39,7 @@ const Layout = ({ isHomePage, children }) => {
   const title = data.wp.generalSettings.title
   const globalnav = data.globalnav.nodes[0].menuItems.nodes
   const infonav = data.infonav.nodes
+  const icon = data.file.publicURL
 
   return (
     <Wrapper data-is-root-path={isHomePage}>
