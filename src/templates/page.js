@@ -129,7 +129,12 @@ const Article = styled.article`
     img {
       width: 80%;
       height: auto;
-      margin: 0 auto;
+      margin: var(--spacing-16) auto 0;
+      padding: 0;
+      display: block;
+    }
+    iframe {
+      margin: var(--spacing-16) auto 0;
       padding: 0;
       display: block;
     }
