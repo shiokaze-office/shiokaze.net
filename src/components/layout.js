@@ -154,10 +154,11 @@ const GlobalUl = styled.ul`
   }
   @media (max-width: 767px) {
     margin-top: var(--spacing-5);
+    /* for safari */
+    padding-bottom: var(--spacing-2);
+    overflow-x: scroll;
+    overflow-y: visible;
   }
-  /* for safari */
-  overflow-x: scroll;
-  overflow-y: visible;
 `
 const InfoUl = styled.ul`
   li {
@@ -171,8 +172,10 @@ const InfoUl = styled.ul`
     }
   }
   /* for safari */
-  overflow-x: scroll;
-  overflow-y: visible;
+  @media (max-width: 767px) {
+    overflow-x: scroll;
+    overflow-y: visible;
+  }
 `
 const Footer = styled.footer`
   margin: var(--spacing-32) var(--spacing-8) 0;
