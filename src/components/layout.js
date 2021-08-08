@@ -200,5 +200,4 @@ const Copyright = styled.span`
 `
 const License = styled.span`
   font-size: var(--spacing-3);
-  white-space: nowrap;
 `
