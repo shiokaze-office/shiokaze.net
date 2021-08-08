@@ -83,7 +83,7 @@ const Layout = ({ isHomePage, children }) => {
         <License>
           Built with <a href="https://www.gatsbyjs.com">Gatsby</a> and
           {` `}<a href="https://wordpress.org/">WordPress</a> on <a href="https://lolipop.jp/">Lolipop</a>.
-          {` `}Some illustrations from <a href="https://www.freepik.com/">Freepik.com</a>.
+          {` `}Some illustrations from <a href="https://www.freepik.com/">pch.vector / Freepik</a>.
         </License>
       </Footer>
       <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&family=Noto+Serif+JP:wght@400;900&display=swap" />
