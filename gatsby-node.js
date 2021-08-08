@@ -5,7 +5,6 @@ const chunk = require(`lodash/chunk`)
 // dd() will prettily dump to the terminal and kill the process
 // const { dd } = require(`dumper.js`)
 
-// See https://www.gatsbyjs.com/docs/node-apis/#createPages for more info.
 exports.createPages = async gatsbyUtilities => {
   const blogs = await getBlogs(gatsbyUtilities)
   const pages = await getPages(gatsbyUtilities)
@@ -15,7 +14,7 @@ exports.createPages = async gatsbyUtilities => {
   }
 
   await createBlogs({ blogs, gatsbyUtilities })
-  //await createBlogArchive({ blogs, gatsbyUtilities })
+  await createBlogArchive({ blogs, gatsbyUtilities })
   await createPages({ pages, gatsbyUtilities })
 }
 

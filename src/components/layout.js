@@ -2,7 +2,7 @@ import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import parse from "html-react-parser"
 import styled from 'styled-components'
-import icon from "./layout/shiokaze-icon.svg"
+import icon from "../../content/assets/shiokaze-icon.svg"
 
 const Layout = ({ isHomePage, children }) => {
   const data = useStaticQuery(graphql`
@@ -178,7 +178,7 @@ const InfoUl = styled.ul`
   }
 `
 const Footer = styled.footer`
-  margin: var(--spacing-32) var(--spacing-8) 0;
+  margin: var(--spacing-32) var(--spacing-8) var(--spacing-5);
 `
 const Copyright = styled.span`
   font-family: var(--fontFamily-sans);

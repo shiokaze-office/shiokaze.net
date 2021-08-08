@@ -5,6 +5,7 @@ import parse from "html-react-parser"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import styled from 'styled-components'
+import hero from "../../content/assets/happy-life.svg"
 
 const HomePage = ({ data }) => {
   const title = data.wp.generalSettings.title
@@ -31,6 +32,7 @@ const HomePage = ({ data }) => {
       <Seo title={title} description={description} />
 
       <Hero>
+        <img src={hero} alt="Happy Life" />
         <p>{description}</p>
       </Hero>
 
@@ -162,6 +164,9 @@ const HomePage = ({ data }) => {
             )
           })}
         </ul>
+        <BlogFooter>
+          <Link to="/blog/">ブログ一覧へ</Link>
+        </BlogFooter>
       </Blog>
     </Layout>
   )
@@ -255,6 +260,7 @@ const StyledBox = styled.div`
 `
 
 const Guide = styled(StyledBox)`
+  padding-top: 0;
 `
 const Proposals = styled(StyledBox)`
   article {
@@ -312,6 +318,11 @@ const Blog = styled.div`
 `
 const BlogHeader = styled(StyledHeader)`
 `
+const BlogFooter = styled.footer`
+  padding: var(--spacing-5) var(--spacing-10) 0;
+  text-align: center;
+  font-size: var(--fontSize-2);
+`
 const DateSpan = styled.span`
   @media (max-width:768px) {
     display: block;
@@ -327,18 +338,34 @@ const ExcerptSpan = styled.span`
   }
 `
 const Hero = styled.div`
-  margin: var(--spacing-32) auto var(--spacing-20);
-  padding: var(--spacing-32) 0 var(--spacing-20);
+  margin: var(--spacing-16) auto 0;
+  padding: var(--spacing-20) 0 0;
   width: var(--maxWidth-4xl);
   font-size: var(--fontSize-4);
+  position: relative;
   p {
     width: var(--maxWidth-xl);
     font-feature-settings: "palt";
+    position: absolute;
+    z-index: 2;
+    top: var(--spacing-16);
+    left: 0;
+    @media (max-width: 1024px) {
+      top: 0;
+    }
+  }
+  img {
+    padding-left: var(--spacing-24);
+    width: 100%;
+    @media (max-width: 768px) {
+      padding-top: var(--spacing-24);
+      padding-left: 0;
+    }
   }
   @media (max-width:768px) {
     width: 100%;
     margin: 0;
-    padding: var(--spacing-10) 0;
+    padding: 0;
     font-size: var(--fontSize-2);
     p {
       width: 100%;
