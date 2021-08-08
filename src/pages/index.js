@@ -13,7 +13,8 @@ const HomePage = ({ data }) => {
   const guide = data.guide.nodes
   const blogs = data.blogs.nodes
   const covid19 = data.covid19.nodes
-  const heroImage = data.file.publicURL
+  const heroImage = data.hero.publicURL
+  const maskPeopleImage = data.maskPeople.publicURL
 
   if (!guide.length && !proposals.length && !blogs.length) {
     return (
@@ -99,6 +100,9 @@ const HomePage = ({ data }) => {
             )
           })}
         </ol>
+        <Covid19Image>
+          <img src={maskPeopleImage} width="500" height="360" alt="Covid-19 Mask People" />
+        </Covid19Image>
       </Covid19>
 
       <Proposals className="clearfix">
@@ -176,7 +180,10 @@ export default HomePage
 
 export const pageQuery = graphql`
   query IndexPage {
-    file(name: { eq: "happy-life" }) {
+    hero: file(name: { eq: "happy-life" }) {
+      publicURL
+    }
+    maskPeople: file(name: { eq: "mask-people" }) {
       publicURL
     }
     wp {
@@ -278,6 +285,7 @@ const Proposals = styled(StyledBox)`
 const ProposalHeader = styled(StyledHeader)`
 `
 const Covid19 = styled(StyledBox)`
+  position: relative;
 `
 const Covid19Header = styled(StyledHeader)`
 `
@@ -371,6 +379,21 @@ const Hero = styled.div`
     p {
       width: 100%;
       padding: var(--spacing-10);
+    }
+  }
+`
+const Covid19Image = styled.div`
+  position: absolute;
+  top: var(--spacing-32);
+  right: 0;
+  z-index: -1;
+  opacity: 0.15;
+  @media (max-width:768px) {
+    top: var(--spacing-16);
+    width: 70%;
+    text-align: right;
+    img {
+      width: 100%;
     }
   }
 `
