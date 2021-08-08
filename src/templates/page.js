@@ -28,7 +28,6 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
       <Seo title={post.title} description={post.title} />
 
       <Article
-        className="blog-post"
         itemScope
         itemType="http://schema.org/Article"
       >

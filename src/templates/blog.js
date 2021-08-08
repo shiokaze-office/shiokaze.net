@@ -27,7 +27,6 @@ const BlogTemplate = ({ data: { previous, next, post } }) => {
       <Seo title={post.title} description={post.excerpt} />
 
       <Article
-        className="blog-post"
         itemScope
         itemType="http://schema.org/Article"
       >
@@ -56,7 +55,7 @@ const BlogTemplate = ({ data: { previous, next, post } }) => {
         </footer>*/}
       </Article>
 
-      <PageNav className="blog-post-nav">
+      <PageNav>
         <ul
           style={{
             display: `flex`,
