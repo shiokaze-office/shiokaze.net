@@ -67,23 +67,6 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-webfonts`,
-      options: {
-        fonts: {
-          google2: [
-            {
-              family: `Noto+Sans+JP`,
-              axes: "wght@400;900",
-            },
-            {
-              family: `Noto+Serif+JP`,
-              axes: "wght@400;900",
-            },
-        ],
-        },
-      },
-    },
-    {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         color: `#CEC0D9`,
