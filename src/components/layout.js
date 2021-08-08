@@ -85,7 +85,6 @@ const Layout = ({ isHomePage, children }) => {
           {` `}<a href="https://wordpress.org/">WordPress</a> on <a href="https://lolipop.jp/">Lolipop</a>
         </License>
       </Footer>
-      <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&family=Noto+Serif+JP:wght@400;900&display=swap" />
     </Wrapper>
   )
 }
