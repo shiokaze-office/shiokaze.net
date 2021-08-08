@@ -123,6 +123,8 @@ const Logo = styled.div`
     display: inline;
     padding: 0 var(--spacing-3) var(--spacing-3) 0;
     vertical-align: top;
+    width: 130px;
+    height: auto;
   }
   @media (max-width: 767px) {
     float: none;
