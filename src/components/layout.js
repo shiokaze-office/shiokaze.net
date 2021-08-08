@@ -45,7 +45,7 @@ const Layout = ({ isHomePage, children }) => {
     <Wrapper data-is-root-path={isHomePage}>
       <header className="clearfix">
         <Logo>
-          <img src={icon} alt="shiokaze icon" />
+          <img src={icon} width="237" height="97" alt="shiokaze icon" />
           {isHomePage ? (
             <h1> <Link to="/">{parse(title)}</Link> </h1>
           ) : (
