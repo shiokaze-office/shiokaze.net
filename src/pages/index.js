@@ -15,6 +15,8 @@ const HomePage = ({ data }) => {
   const covid19 = data.covid19.nodes
   const heroImage = data.hero.publicURL
   const maskPeopleImage = data.maskPeople.publicURL
+  const whatsNewImage = data.whatsNew.publicURL
+  const interviewImage = data.interview.publicURL
 
   if (!guide.length && !proposals.length && !blogs.length) {
     return (
@@ -138,6 +140,9 @@ const HomePage = ({ data }) => {
             )
           })}
         </ol>
+        <ProposalImage>
+          <img src={interviewImage} width="500" height="292" alt="Interview" />
+        </ProposalImage>
       </Proposals>
 
       <Blog className="clearfix">
@@ -171,6 +176,9 @@ const HomePage = ({ data }) => {
         <BlogFooter>
           <Link to="/blog/">ブログ一覧へ</Link>
         </BlogFooter>
+        <BlogImage>
+          <img src={whatsNewImage} width="500" height="232" alt="What's New" />
+        </BlogImage>
       </Blog>
     </Layout>
   )
@@ -184,6 +192,12 @@ export const pageQuery = graphql`
       publicURL
     }
     maskPeople: file(name: { eq: "mask-people" }) {
+      publicURL
+    }
+    whatsNew: file(name: { eq: "whats-new" }) {
+      publicURL
+    }
+    interview: file(name: { eq: "interview" }) {
       publicURL
     }
     wp {
@@ -273,6 +287,7 @@ const Guide = styled(StyledBox)`
   padding-top: 0;
 `
 const Proposals = styled(StyledBox)`
+  position: relative;
   article {
     width: 40rem;
   }
@@ -290,6 +305,7 @@ const Covid19 = styled(StyledBox)`
 const Covid19Header = styled(StyledHeader)`
 `
 const Blog = styled.div`
+  position: relative;
   padding-top: var(--spacing-32);
   li {
     list-style-type: none;
@@ -382,18 +398,33 @@ const Hero = styled.div`
     }
   }
 `
-const Covid19Image = styled.div`
+const SectionImage = styled.div`
   position: absolute;
-  top: var(--spacing-32);
+  top: var(--spacing-20);
   right: 0;
   z-index: -1;
-  opacity: 0.15;
+  text-align: right;
   @media (max-width:768px) {
-    top: var(--spacing-16);
+    top: var(--spacing-10);
     width: 70%;
     text-align: right;
     img {
       width: 100%;
     }
   }
+`
+const BlogImage = styled(SectionImage)`
+`
+const Covid19Image = styled(SectionImage)`
+  top: var(--spacing-10);
+  opacity: 0.7;
+  img {
+    width: 60%;
+  }
+  @media (max-width:768px) {
+    top: var(--spacing-16);
+  }
+`
+const ProposalImage = styled(SectionImage)`
+  opacity: 0.8;
 `
