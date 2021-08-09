@@ -135,7 +135,7 @@ const Article = styled.article`
   padding-top: var(--spacing-10);
   font-size: var(--fontSize-3);
 
-  h1, h2, h3, h4, h5, ul, ol, p, hr, form {
+  h1, h2, h3, h4, h5, ul, ol, p, hr, form, blockquote {
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
     padding: 0 var(--spacing-10);
@@ -177,6 +177,21 @@ const Article = styled.article`
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
     padding: var(--spacing-10) var(--spacing-10) 0;
+  }
+  blockquote {
+    margin-top: var(--spacing-10);
+    padding: var(--spacing-5) var(--spacing-10);
+    background-color: var(--color-shiokaze-3);
+    p {
+      padding: var(--spacing-2) 0 0;
+    }
+    cite {
+      padding: 0;
+      font-weight: var(--fontWeight-bold);
+      font-family: var(--fontFamily-sans);
+      color: var(--color-shiokaze-2);
+      letter-spacing: -1px;
+    }
   }
 `
 
