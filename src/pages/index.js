@@ -73,7 +73,7 @@ const HomePage = ({ data }) => {
       <Covid19 className="clearfix">
         <Covid19Header>
           <h2>新型コロナ対応支援</h2>
-          <p>新型コロナウイルスによって影響を受けている方々に向けて、各省庁や地方自治体が行っている支援を まとめました。</p>
+          <p>新型コロナウイルスによって影響を受けている方々に向けて、各省庁や地方自治体が行っている支援をまとめました。</p>
         </Covid19Header>
         <ol style={{ listStyle: `none` }}>
           {covid19.map(post => {
@@ -174,7 +174,7 @@ const HomePage = ({ data }) => {
           })}
         </ul>
         <BlogFooter>
-          <Link to="/blog/">ブログ一覧へ</Link>
+          <Link to="/blog/" className="button-dark"><span role="img" aria-label="memo">📝</span> ブログ一覧へ</Link>
         </BlogFooter>
         <BlogImage>
           <img src={whatsNewImage} width="500" height="232" alt="What's New" />
@@ -348,7 +348,7 @@ const BlogHeader = styled(StyledHeader)`
 const BlogFooter = styled.footer`
   padding: var(--spacing-5) var(--spacing-10) 0;
   text-align: center;
-  font-size: var(--fontSize-2);
+  font-size: var(--fontSize-1);
 `
 const DateSpan = styled.span`
   @media (max-width:768px) {
@@ -416,15 +416,20 @@ const SectionImage = styled.div`
 const BlogImage = styled(SectionImage)`
 `
 const Covid19Image = styled(SectionImage)`
+  text-align: center;
   top: var(--spacing-10);
   opacity: 0.7;
   img {
     width: 60%;
   }
   @media (max-width:768px) {
-    top: var(--spacing-16);
+    text-align: right;
+    top: 0;
   }
 `
 const ProposalImage = styled(SectionImage)`
   opacity: 0.8;
+  @media (max-width:768px) {
+    top: 0;
+  }
 `
