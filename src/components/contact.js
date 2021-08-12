@@ -184,7 +184,7 @@ const Contact = () => {
       {formStatus ? (<Sent>お問い合わせを送信しました。</Sent>) : (
         <ButtonBox>
           {lockStatus && (<Spinner type="Grid" color="#FFF" height={30} width={30} />)}
-          <Button type="submit" disabled={lockStatus}>送信する</Button>
+          <Button className="button-dark" type="submit" disabled={lockStatus}>送信する</Button>
         </ButtonBox>
       )}
     </Form>
@@ -228,15 +228,10 @@ const Textarea = styled.textarea`
 `
 const Button = styled.button`
   font-size: var(--fontSize-2);
-  border-radius: 30px 30px;
   border: 1px solid var(--color-primary);
-  background-color: var(--color-primary);
-  color: #fff;
-  padding: var(--spacing-3) var(--spacing-10);
   margin: var(--spacing-10) auto;
-  width: auto;
   display: block;
-  cursor: pointer;
+  padding: var(--spacing-3) var(--spacing-10);
 `
 const Sent = styled.div`
   background-color: #99ffcc;

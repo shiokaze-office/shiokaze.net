@@ -269,6 +269,7 @@ a:focus {
   font-family: var(--fontFamily-sans);
   margin-top: var(--spacing-5);
   display: inline-block;
+  cursor: pointer;
 }
 
 .button-dark {
@@ -280,6 +281,7 @@ a:focus {
   font-family: var(--fontFamily-sans);
   margin-top: var(--spacing-5);
   display: inline-block;
+  cursor: pointer;
 }
 
 /* Media queries */
