@@ -284,6 +284,10 @@ a:focus {
   cursor: pointer;
 }
 
+html {
+  background-color: var(--color-shiokaze-3);
+}
+
 /* Media queries */
 
 @media (max-width: 42rem) {

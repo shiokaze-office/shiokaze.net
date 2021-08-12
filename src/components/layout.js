@@ -96,6 +96,7 @@ const Wrapper = styled.div`
   border-top: var(--spacing-4) #E6E0ED solid;
   margin: 0;
   padding: 0;
+  background-color: #fff;
 `
 const Logo = styled.div`
   margin: 0 0 0 var(--spacing-8);
@@ -183,7 +184,7 @@ const InfoUl = styled.ul`
   }
 `
 const Footer = styled.footer`
-  margin: var(--spacing-32) var(--spacing-8) var(--spacing-5);
+  padding: var(--spacing-32) var(--spacing-8) var(--spacing-10);
 `
 const Copyright = styled.span`
   font-family: var(--fontFamily-sans);

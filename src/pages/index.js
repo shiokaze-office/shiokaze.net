@@ -71,6 +71,9 @@ const HomePage = ({ data }) => {
       </Guide>
 
       <Covid19 className="clearfix">
+        <Covid19Image>
+          <img src={maskPeopleImage} width="500" height="360" alt="Covid-19 Mask People" />
+        </Covid19Image>
         <Covid19Header>
           <h2>新型コロナ対応支援</h2>
           <p>新型コロナウイルスによって影響を受けている方々に向けて、各省庁や地方自治体が行っている支援をまとめました。</p>
@@ -102,12 +105,12 @@ const HomePage = ({ data }) => {
             )
           })}
         </ol>
-        <Covid19Image>
-          <img src={maskPeopleImage} width="500" height="360" alt="Covid-19 Mask People" />
-        </Covid19Image>
       </Covid19>
 
       <Proposals className="clearfix">
+        <ProposalImage>
+          <img src={interviewImage} width="500" height="292" alt="Interview" />
+        </ProposalImage>
         <ProposalHeader>
           <h2>ご提案</h2>
           <p>老後の生活に不安や不便を感じるすべての方へ、お客様にあったご提案をします。</p>
@@ -140,12 +143,12 @@ const HomePage = ({ data }) => {
             )
           })}
         </ol>
-        <ProposalImage>
-          <img src={interviewImage} width="500" height="292" alt="Interview" />
-        </ProposalImage>
       </Proposals>
 
       <Blog className="clearfix">
+        <BlogImage>
+          <img src={whatsNewImage} width="500" height="232" alt="What's New" />
+        </BlogImage>
         <BlogHeader>
           <h2>ブログ</h2>
           <p>日常業務でのちょっとした気づきなどを中心に書きます</p>
@@ -176,9 +179,6 @@ const HomePage = ({ data }) => {
         <BlogFooter>
           <Link to="/blog/" className="button-dark"><span role="img" aria-label="memo">📝</span> ブログ一覧へ</Link>
         </BlogFooter>
-        <BlogImage>
-          <img src={whatsNewImage} width="500" height="232" alt="What's New" />
-        </BlogImage>
       </Blog>
     </Layout>
   )
@@ -255,8 +255,11 @@ export const pageQuery = graphql`
 `
 const StyledHeader = styled.header`
   padding: var(--spacing-10) var(--spacing-10) 0;
+  position: relative;
+  z-index: 2;
 `
 const StyledBox = styled.div`
+  position: relative;
   padding-top: var(--spacing-32);
   li {
     list-style-type: none;
@@ -287,7 +290,6 @@ const Guide = styled(StyledBox)`
   padding-top: 0;
 `
 const Proposals = styled(StyledBox)`
-  position: relative;
   article {
     width: 40rem;
   }
@@ -300,7 +302,6 @@ const Proposals = styled(StyledBox)`
 const ProposalHeader = styled(StyledHeader)`
 `
 const Covid19 = styled(StyledBox)`
-  position: relative;
 `
 const Covid19Header = styled(StyledHeader)`
 `
@@ -401,8 +402,7 @@ const Hero = styled.div`
 const SectionImage = styled.div`
   position: absolute;
   top: var(--spacing-20);
-  right: 0;
-  z-index: -1;
+  right: var(--spacing-8);
   text-align: right;
   @media (max-width:768px) {
     top: var(--spacing-10);
@@ -416,7 +416,6 @@ const SectionImage = styled.div`
 const BlogImage = styled(SectionImage)`
 `
 const Covid19Image = styled(SectionImage)`
-  text-align: center;
   top: var(--spacing-10);
   opacity: 0.7;
   img {
