@@ -25,21 +25,21 @@ const Button = styled.button`
   display: none;
   @media (max-width: 767px) {
     position: fixed;
-    top: 5%;
-    right: 2rem;
+    top: var(--spacing-8);
+    right: var(--spacing-8);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spacing-8);
+    height: var(--spacing-8);
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
     z-index: 10;
     span {
-      width: 2rem;
-      height: 0.25rem;
+      width: var(--spacing-8);
+      height: var(--spacing-1);
       background: #000;
       border-radius: 10px;
       transition: all 0.3s linear;

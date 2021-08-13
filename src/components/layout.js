@@ -259,7 +259,7 @@ const MobileNav = styled.div`
     background: #000;
     z-index: 999;
     margin: 0 auto;
-    padding: var(--spacing-1) 0 var(--spacing-3);
+    padding: var(--spacing-1) 0 var(--spacing-6);
     ul {
       list-style-type: none;
       padding: 0;
