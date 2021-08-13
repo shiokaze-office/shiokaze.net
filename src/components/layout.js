@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import parse from "html-react-parser"
 import styled from 'styled-components'
+import Burger from '../components/burger'
+import Menu from '../components/menu'
 
 const Layout = ({ isHomePage, children }) => {
   const data = useStaticQuery(graphql`
@@ -40,6 +42,32 @@ const Layout = ({ isHomePage, children }) => {
   const globalnav = data.globalnav.nodes[0].menuItems.nodes
   const infonav = data.infonav.nodes
   const icon = data.file.publicURL
+  const mobnav = [
+    { uri: "/", label: "house", emoji: "🏠", title: "ホーム" },
+    { uri: "/about/", label: "round_pushpin", emoji: "📍", title: "事務所案内" },
+    { uri: "/public-notary/", label: "information_desk_person", emoji: "💁‍♀️", title: "行政書士紹介" },
+    { uri: "/contact/", label: "postbox", emoji: "📮", title: "お問い合わせ" },
+  ]
+  const [open, setOpen] = useState(false)
+  const menuId = "main-menu"
+  const useOnClickOutside = (ref, handler) => {
+    useEffect(() => {
+      const listener = event => {
+        if (!ref.current || ref.current.contains(event.target)) {
+          return
+        }
+        handler(event);
+      }
+      document.addEventListener('mousedown', listener)
+      return () => {
+        document.removeEventListener('mousedown', listener)
+      }
+    },
+    [ref, handler],
+    )
+  }
+  const node = useRef()
+  useOnClickOutside(node, () => setOpen(false))
 
   return (
     <Wrapper data-is-root-path={isHomePage}>
@@ -72,13 +100,31 @@ const Layout = ({ isHomePage, children }) => {
             })}
           </GlobalUl>
         </Nav>
+        <MobileNav>
+          <ul>
+            {mobnav.map(nav => {
+              return (
+                <li key={nav.uri}>
+                  <Link to={nav.uri}>
+                    <span role="img" aria-label={nav.lable}>{nav.emoji}</span>
+                    {nav.title}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </MobileNav>
+        <div ref={node}>
+          <Burger open={open} setOpen={setOpen} aria-controls={menuId} />
+          <Menu open={open} setOpen={setOpen} id={menuId} />
+        </div>
       </header>
 
       <main>{children}</main>
 
       <Footer>
         <Copyright>
-          © {new Date().getFullYear()} {<Link to="/">{parse(title)}</Link>}
+          &copy; {new Date().getFullYear()} {<Link to="/">{parse(title)}</Link>}
         </Copyright>
         <License>
           Built with <a href="https://www.gatsbyjs.com">Gatsby</a> and
@@ -159,10 +205,7 @@ const GlobalUl = styled.ul`
     padding-right: var(--spacing-5);
   }
   @media (max-width: 767px) {
-    margin-top: var(--spacing-5);
-    /* for safari */
-    overflow-x: scroll;
-    overflow-y: visible;
+    display: none;
   }
 `
 const InfoUl = styled.ul`
@@ -176,15 +219,16 @@ const InfoUl = styled.ul`
       border-radius: 20px;
     }
   }
-  /* for safari */
   @media (max-width: 767px) {
-    padding-bottom: var(--spacing-2);
-    overflow-x: scroll;
-    overflow-y: visible;
+    display: none;
   }
 `
 const Footer = styled.footer`
   padding: var(--spacing-32) var(--spacing-8) var(--spacing-10);
+  @media (max-width: 767px) {
+    padding-bottom: var(--spacing-20);
+    margin-bottom: var(--spacing-20);
+  }
 `
 const Copyright = styled.span`
   font-family: var(--fontFamily-sans);
@@ -203,4 +247,44 @@ const Copyright = styled.span`
 `
 const License = styled.span`
   font-size: var(--spacing-3);
+`
+const MobileNav = styled.div`
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    z-index: 999;
+    margin: 0 auto;
+    padding: var(--spacing-1) 0 var(--spacing-3);
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      color: #fff;
+      font-size: var(--fontSize-0);
+    }
+    li {
+      line-height: 1.3;
+      margin: 0;
+    }
+    a {
+      display: block;
+      text-align: center;
+      color: #fff;
+      font-family: var(--fontFamily-sans);
+      font-weight: var(--fontWeight-bold);
+      text-decoration: none;
+    }
+    span {
+      display: block;
+      text-align: center;
+      font-size: var(--fontSize-6);
+    }
+  }
 `
