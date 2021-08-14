@@ -1,9 +1,14 @@
-import React from "react"
-import { Link } from "gatsby"
-import parse from "html-react-parser"
+import React from 'react'
+import { Link } from 'gatsby'
+import parse from 'html-react-parser'
 import styled from 'styled-components'
 
-const Nav = ({ infonav, globalnav }) => {
+type Props = {
+  infonav: object
+  globalnav: object
+}
+
+const Nav: React.FC = ({ infonav, globalnav }: Props) => {
   return (
     <StyledNav>
       <InfoUl>

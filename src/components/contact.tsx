@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Loader from 'react-loader-spinner'
 
-const Contact = () => {
+const Contact: React.FC = () => {
   const endpoint = `https://linyows.lolipop.jp/contact.shiokaze.net/`
   const initQuery = {
     name: ``,

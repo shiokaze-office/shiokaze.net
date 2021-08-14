@@ -1,9 +1,15 @@
 import React from 'react'
-import { Link } from "gatsby"
+import { Link } from 'gatsby'
 import { bool } from 'prop-types'
 import styled from 'styled-components'
 
-const Menu = ({ nav, icon, open, ...props }) => {
+type Props = {
+  nav: object
+  icon: string
+  open: boolean
+}
+
+const Menu: React.FC = ({ nav, icon, open, ...props }: Props) => {
   const isHidden = open ? true : false
   const tabIndex = isHidden ? 0 : -1
 
@@ -28,10 +34,6 @@ const Menu = ({ nav, icon, open, ...props }) => {
       </ul>
     </StyledMenu>
   )
-}
-
-Menu.propTypes = {
-  open: bool.isRequired,
 }
 
 export default Menu

@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import styled from 'styled-components'
 import GoogleMapReact from 'google-map-react'
 
-const Map = () => {
+const Map: React.FC = () => {
   const key = `AIzaSyCxWeezNfUlaG2bDgvDpwpf3K_hsbzk5oA`
   const lat = 33.5863496
   const lng = 130.3116807

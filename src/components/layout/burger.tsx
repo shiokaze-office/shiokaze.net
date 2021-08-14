@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { bool, func } from 'prop-types'
 
-const Burger = ({ open, setOpen, ...props }) => {
+type Props = {
+  open: boolean
+  setOpen: React.Dispatch
+}
+
+const Burger: React.FC = ({ open, setOpen, ...props }: Props) => {
   const isExpanded = open ? true : false
-  console.log(open, setOpen, props)
   return (
     <Button aria-label="Toggle menu" aria-expanded={isExpanded} open={open} onClick={() => setOpen(!open)} {...props}>
       <span />
@@ -12,11 +15,6 @@ const Burger = ({ open, setOpen, ...props }) => {
       <span />
     </Button>
   )
-}
-
-Burger.propTypes = {
-  open: bool.isRequired,
-  setOpen: func.isRequired,
 }
 
 export default Burger

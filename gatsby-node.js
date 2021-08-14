@@ -23,7 +23,7 @@ const createBlogs = async ({ blogs, gatsbyUtilities }) =>
     blogs.map(({ previous, blog, next }) =>
       gatsbyUtilities.actions.createPage({
         path: blog.uri,
-        component: path.resolve(`./src/templates/blog.js`),
+        component: path.resolve(`./src/templates/blog.tsx`),
         context: {
           id: blog.id,
           previousPostId: previous ? previous.id : null,
@@ -64,7 +64,7 @@ async function createBlogArchive({ blogs, gatsbyUtilities }) {
 
       await gatsbyUtilities.actions.createPage({
         path: getPagePath(pageNumber),
-        component: path.resolve(`./src/templates/blog-archive.js`),
+        component: path.resolve(`./src/templates/blog-archive.tsx`),
         context: {
           // the index of our loop is the offset of which posts we want to display
           // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
@@ -116,7 +116,7 @@ const createPages = async ({ pages, gatsbyUtilities }) =>
     pages.map(({ previous, page, next }) =>
       gatsbyUtilities.actions.createPage({
         path: page.uri,
-        component: path.resolve(`./src/templates/page.js`),
+        component: path.resolve(`./src/templates/page.tsx`),
         context: {
           id: page.id,
           previousPostId: previous ? previous.id : null,

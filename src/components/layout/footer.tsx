@@ -1,9 +1,13 @@
-import React from "react"
-import { Link } from "gatsby"
-import parse from "html-react-parser"
+import React from 'react'
+import { Link } from 'gatsby'
+import parse from 'html-react-parser'
 import styled from 'styled-components'
 
-const Footer = ({ title }) => {
+type Props = {
+  title: string
+}
+
+const Footer: React.FC = ({ title }: Props) => {
   return (
     <StyledFooter>
       <Copyright>

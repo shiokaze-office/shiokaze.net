@@ -1,15 +1,14 @@
-import React from "react"
-import { graphql } from "gatsby"
-
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import React from 'react'
+import { graphql, PageProps } from 'gatsby'
 import styled from 'styled-components'
+import Layout from '../components/layout'
+import Seo from '../components/seo'
 
-const NotFoundPage = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
+const NotFoundPage: React.FC<PageProps> = ({ data, location}) => {
+  const title = data.site.siteMetadata.title
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={title}>
       <Seo title="404: Not Found" />
       <Message>
         <h1>404: Not Found</h1>

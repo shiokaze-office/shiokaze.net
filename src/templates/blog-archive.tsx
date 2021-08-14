@@ -1,12 +1,30 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import parse from "html-react-parser"
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import parse from 'html-react-parser'
 import styled from 'styled-components'
+import Layout from '../components/layout'
+import Seo from '../components/seo'
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+export const BlogArchiveTemplateQuery = graphql`
+  query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {
+    allWpPost(
+      sort: { fields: [date], order: DESC }
+      limit: $postsPerPage
+      skip: $offset
+    ) {
+      nodes {
+        excerpt
+        uri
+        date(formatString: "MMMM DD")
+        year: date(formatString: "YYYY")
+        title
+        excerpt
+      }
+    }
+  }
+`
 
-const BlogIndex = ({
+const BlogIndex: React.RC<GatsbyTypes.WordPressPostArchiveQuery> = ({
   data,
   pageContext: { nextPagePath, previousPagePath },
 }) => {
@@ -67,25 +85,6 @@ const BlogIndex = ({
 }
 
 export default BlogIndex
-
-export const pageQuery = graphql`
-  query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {
-    allWpPost(
-      sort: { fields: [date], order: DESC }
-      limit: $postsPerPage
-      skip: $offset
-    ) {
-      nodes {
-        excerpt
-        uri
-        date(formatString: "MMMM DD")
-        year: date(formatString: "YYYY")
-        title
-        excerpt
-      }
-    }
-  }
-`
 
 const BlogHeader = styled.header`
   max-width: var(--maxWidth-4xl);

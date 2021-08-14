@@ -1,7 +1,7 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import Image from "gatsby-image"
-import parse from "html-react-parser"
+import React from 'react'
+import { Link, graphql, PageProps } from 'gatsby'
+import Image from 'gatsby-image'
+import parse from 'html-react-parser'
 import styled from 'styled-components'
 
 // We're using Gutenberg so we need the block styles
@@ -9,14 +9,61 @@ import styled from 'styled-components'
 // version used by the Gatsby and @wordpress packages that causes build
 // failures.
 // @todo update this once @wordpress upgrades their postcss version
-import "../css/@wordpress/block-library/build-style/style.css"
-import "../css/@wordpress/block-library/build-style/theme.css"
+import '../css/@wordpress/block-library/build-style/style.css'
+import '../css/@wordpress/block-library/build-style/theme.css'
 
-//import Bio from "../components/bio"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+//import Bio from '../components/bio'
+import Layout from '../components/layout'
+import Seo from '../components/seo'
 
-const BlogTemplate = ({ data: { previous, next, post } }) => {
+type Props = {
+  data: any
+}
+
+export const BlogTemplateQuery  = graphql`
+  query BlogById(
+    # these variables are passed in via createPage.pageContext in gatsby-node.js
+    $id: String!
+    $previousPostId: String
+    $nextPostId: String
+  ) {
+    # selecting the current post by id
+    post: wpPost(id: { eq: $id }) {
+      id
+      excerpt
+      content
+      title
+      date(formatString: "YYYY年MM月DD日")
+
+      featuredImage {
+        node {
+          altText
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 1000, quality: 100) {
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
+        }
+      }
+    }
+
+    # this gets us the previous post by id (if it exists)
+    previous: wpPost(id: { eq: $previousPostId }) {
+      uri
+      title
+    }
+
+    # this gets us the next post by id (if it exists)
+    next: wpPost(id: { eq: $nextPostId }) {
+      uri
+      title
+    }
+  }
+`
+
+const BlogTemplate: React.RC<GatsbyTypes.BlogByIdQuery> = ({ data: { previous, next, post } }) => {
   const featuredImage = {
     fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
     alt: post.featuredImage?.node?.alt || ``,
@@ -87,49 +134,6 @@ const BlogTemplate = ({ data: { previous, next, post } }) => {
 }
 
 export default BlogTemplate
-
-export const pageQuery = graphql`
-  query BlogById(
-    # these variables are passed in via createPage.pageContext in gatsby-node.js
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
-  ) {
-    # selecting the current post by id
-    post: wpPost(id: { eq: $id }) {
-      id
-      excerpt
-      content
-      title
-      date(formatString: "YYYY年MM月DD日")
-
-      featuredImage {
-        node {
-          altText
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1000, quality: 100) {
-                ...GatsbyImageSharpFluid_tracedSVG
-              }
-            }
-          }
-        }
-      }
-    }
-
-    # this gets us the previous post by id (if it exists)
-    previous: wpPost(id: { eq: $previousPostId }) {
-      uri
-      title
-    }
-
-    # this gets us the next post by id (if it exists)
-    next: wpPost(id: { eq: $nextPostId }) {
-      uri
-      title
-    }
-  }
-`
 
 const Article = styled.article`
   padding-top: var(--spacing-10);

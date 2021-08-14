@@ -5,6 +5,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-typegen`,
     {
       resolve: `gatsby-source-wordpress`,
       options: {

@@ -1,8 +1,8 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-const MobileNav = () => {
+const MobileNav: React.FC = () => {
   const mobnav = [
     { uri: "/", label: "house", emoji: "🏠", title: "ホーム" },
     { uri: "/about/", label: "round_pushpin", emoji: "📍", title: "事務所案内" },

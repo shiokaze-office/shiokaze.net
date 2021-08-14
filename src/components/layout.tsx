@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import parse from "html-react-parser"
+import React, { useState, useEffect, useRef } from 'react'
+import { Link, useStaticQuery, graphql } from 'gatsby'
+import parse from 'html-react-parser'
 import styled from 'styled-components'
 import Burger from './layout/burger'
 import Menu from './layout/menu'
@@ -8,9 +8,9 @@ import Nav from './layout/nav'
 import MobileNav from './layout/mobile-nav'
 import Footer from './layout/footer'
 
-const Layout = ({ isHomePage, children }) => {
-  const data = useStaticQuery(graphql`
-    query LayoutQuery {
+const Layout: React.FC = ({ isHomePage, children }) => {
+  const data = useStaticQuery<GatsbyTypes.LayoutQuery>(graphql`
+    query Layout {
       file(relativePath: { eq: "shiokaze-icon.svg" }) {
         publicURL
       }
