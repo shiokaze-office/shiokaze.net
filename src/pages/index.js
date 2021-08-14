@@ -207,7 +207,7 @@ export const pageQuery = graphql`
       }
     }
     guide: allWpPage(
-      sort: { fields: [date], order: DESC }
+      sort: { fields: [date], order: ASC }
       filter: {slug: {regex: "/^(?!proposals-.*|about|contact|public-notary|privacy-policy)/"}}
     ) {
       nodes {
