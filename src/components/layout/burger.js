@@ -24,10 +24,10 @@ export default Burger
 const Button = styled.button`
   display: none;
   @media (max-width: 767px) {
-    position: fixed;
-    top: var(--spacing-8);
-    right: var(--spacing-8);
     display: flex;
+    position: fixed;
+    top: var(--spacing-10);
+    right: var(--spacing-8);
     flex-direction: column;
     justify-content: space-around;
     width: var(--spacing-8);
@@ -40,7 +40,7 @@ const Button = styled.button`
     span {
       width: var(--spacing-8);
       height: var(--spacing-1);
-      background: #000;
+      background: var(--color-text-light);
       border-radius: 10px;
       transition: all 0.3s linear;
       position: relative;

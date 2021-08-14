@@ -1,37 +1,17 @@
 import React from 'react'
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link } from "gatsby"
 import { bool } from 'prop-types'
 import styled from 'styled-components'
 
-const Menu = ({ open, ...props }) => {
-  const data = useStaticQuery(graphql`
-    query MenuQuery {
-      file(relativePath: { eq: "shiokaze-icon.svg" }) {
-        publicURL
-      }
-      globalnav: allWpMenu(filter: {slug: {eq: "global-navigation"}}) {
-        nodes {
-          menuItems {
-            nodes {
-              label
-              url
-            }
-          }
-        }
-      }
-    }
-  `)
-
+const Menu = ({ nav, icon, open, ...props }) => {
   const isHidden = open ? true : false
   const tabIndex = isHidden ? 0 : -1
-  const globalnav = data.globalnav.nodes[0].menuItems.nodes
-  const icon = data.file.publicURL
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
       <img src={icon} width="237" height="97" alt="shiokaze icon" />
       <ul>
-        {globalnav.map(nav => {
+        {nav.map(nav => {
           return (
             <li key={nav.url}>
               <Link to={nav.url} tabIndex={tabIndex}>
