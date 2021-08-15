@@ -3,15 +3,13 @@ import { graphql } from 'gatsby'
 import Image from 'gatsby-image'
 import parse from 'html-react-parser'
 import styled from 'styled-components'
-
 // We're using Gutenberg so we need the block styles
 // these are copied into this project due to a conflict in the postCSS
 // version used by the Gatsby and @wordpress packages that causes build
 // failures.
 // @todo update this once @wordpress upgrades their postcss version
-import '../css/@wordpress/block-library/build-style/style.css'
-import '../css/@wordpress/block-library/build-style/theme.css'
-
+//import '../css/@wordpress/block-library/build-style/style.css'
+//import '../css/@wordpress/block-library/build-style/theme.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import Contact from '../components/contact'
@@ -60,7 +58,7 @@ export const PageTemplateQuery = graphql`
   }
 `
 
-const PageTemplate: React.RC<GatsbyTypes.PageByIdQuery> = ({ data: { previous, next, post } }) => {
+const PageTemplate: React.RC<GatsbyTypes.PageByIdQuery> = ({ data: { previous, next, post } }: GatsbyTypes.PageByIdQueryVariables) => {
   const featuredImage = {
     fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
     alt: post.featuredImage?.node?.alt || ``,
