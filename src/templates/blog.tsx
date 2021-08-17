@@ -184,6 +184,18 @@ const Article = styled.article`
       letter-spacing: -1px;
     }
   }
+  @media (max-width:1024px) {
+    .wp-block-embed {
+      margin: 0;
+    }
+    section {
+      iframe {
+        margin: var(--spacing-8) auto 0;
+        width: 100%;
+        height: 80vmin;
+      }
+    }
+  }
 `
 
 const PageNav = styled.nav`
