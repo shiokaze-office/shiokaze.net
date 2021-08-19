@@ -136,6 +136,18 @@ const Article = styled.article`
       padding: 0;
       display: block;
     }
+    .size-medium {
+      img {
+        max-width: 360px;
+        margin: var(--spacing-12) auto 0;
+      }
+    }
+    .size-small {
+      img {
+        max-width: 180px;
+        margin: var(--spacing-10) auto 0;
+      }
+    }
   }
   header {
     max-width: var(--maxWidth-4xl);
