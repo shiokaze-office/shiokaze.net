@@ -10,6 +10,7 @@ export const BlogArchiveTemplateQuery = graphql`
     allWpPost(
       sort: { fields: [date], order: DESC }
       limit: $postsPerPage
+      filter: {categories: {nodes: {elemMatch: {slug: {eq: "blog"}}}}}
       skip: $offset
     ) {
       nodes {
@@ -51,6 +52,8 @@ const BlogIndex: React.RC<GatsbyTypes.WordPressPostArchiveQuery> = ({
       </BlogHeader>
       <BlogOl>
         {posts.map(post => {
+          const title = post.title
+          const limit = 100 - title.length
           return (
             <li key={post.uri}>
               <Article itemScope itemType="http://schema.org/Article">
@@ -64,7 +67,12 @@ const BlogIndex: React.RC<GatsbyTypes.WordPressPostArchiveQuery> = ({
                     {post.date}, <span>{post.year}</span>
                   </BlogDate>
                 </header>
-                <section itemProp="description">{parse(post.excerpt)}</section>
+                <section itemProp="description">
+                  <p>
+                    {parse(post.excerpt.replace(/<[^>]*>?/gm, '').replace(/\r?\n/g, '').substr(0, limit))} …
+                    {` `} <Link to={post.uri} itemProp="url">続きを読む</Link>
+                  </p>
+                </section>
               </Article>
             </li>
           )
