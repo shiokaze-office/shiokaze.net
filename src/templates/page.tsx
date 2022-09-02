@@ -153,6 +153,26 @@ const Article = styled.article`
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
   }
+  .wp-block-table {
+    max-width: var(--maxWidth-4xl);
+    margin: var(--spacing-10) auto;
+    padding: 0 var(--spacing-10);
+  }
+  table {
+    max-width: var(--maxWidth-4xl);
+    padding: 0 var(--spacing-10);
+  }
+  tr {
+    border: 1px solid #999;
+  }
+  td {
+    padding: var(--spacing-2) var(--spacing-6);
+    border-right: 1px solid #999;
+  }
+  td:nth-child(odd) {
+    width: 50%;
+    background-color: #f5f5f5;
+  }
   footer {
     max-width: var(--maxWidth-4xl);
     margin: 0 auto;
