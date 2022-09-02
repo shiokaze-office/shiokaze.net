@@ -7,6 +7,7 @@ const MobileNav: React.FC = () => {
     { uri: "/", label: "house", emoji: "🏠", title: "ホーム" },
     { uri: "/about/", label: "round_pushpin", emoji: "📍", title: "事務所案内" },
     { uri: "/public-notary/", label: "information_desk_person", emoji: "💁‍♀️", title: "行政書士紹介" },
+    { uri: "/fee/", label: "clipboard", emoji: "📋", title: "報酬額表" },
     { uri: "/contact/", label: "postbox", emoji: "📮", title: "お問い合わせ" },
   ]
 
@@ -41,14 +42,14 @@ const StyledDiv = styled.div`
     background: #fff;
     z-index: 999;
     margin: 0 auto;
-    padding: var(--spacing-3) 0 var(--spacing-6);
+    padding: var(--spacing-3) 0 var(--spacing-8);
     border-top: 1px solid #eee;
     ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       color: #fff;
       font-size: var(--fontSize-0);
     }

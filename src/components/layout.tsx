@@ -31,7 +31,7 @@ const Layout: React.FC = ({ isHomePage, children }) => {
       }
       infonav: allWpPage(
         sort: { fields: [date], order: DESC }
-        filter: {slug: {regex: "/^(about|contact|public-notary)$/"}}
+        filter: {slug: {regex: "/^(about|contact|public-notary|fee)$/"}}
       ) {
         nodes {
           uri
